@@ -1,8 +1,24 @@
-const arr = [1, 2, 3, 4, 1, 0, 2, 2];
+function divide(arr, n) {
+    const result = [];
+    let currentChunk = [];
+    let currentSum = 0;
 
-const divide = (arr, n) => {
-  // Write your code here
-};
+    for (let i = 0; i < arr.length; i++) {
+        if (currentSum + arr[i] <= n) {
+            currentChunk.push(arr[i]);
+            currentSum += arr[i];
+        } else {
+            // Start a new subarray
+            result.push(currentChunk);
+            currentChunk = [arr[i]];
+            currentSum = arr[i];
+        }
+    }
 
-const n = prompt("Enter n: ");
-alert(JSON.stringify(divide(arr, n)));
+    // Push the last chunk if not empty
+    if (currentChunk.length > 0) {
+        result.push(currentChunk);
+    }
+
+    return result;
+}
